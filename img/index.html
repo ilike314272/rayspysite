@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RaySpy</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Video background */
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: contain;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Transparent sticky navbar */
+    header {
+      position: sticky;
+      top: 0;
+      background: transparent;
+      padding: 1em 2em;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    /* Overlay text */
+    .overlay {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: transparent;
+    }
+
+    .overlay h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+
+    .overlay p {
+      font-size: 1.25em;
+      max-width: 600px;
+    }
+
+    /* Content */
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+      padding: 3em 2em;
+      background: black;
+    }
+
+    .content p {
+      line-height: 1.6;
+    }
+
+    /* Email box */
+    .email-box {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      color: white;
+      padding: 1em;
+      border-radius: 0.5em 0 0 0.5em;
+      z-index: 10;
+    }
+
+    /* Footer email box for mobile */
+    .footer-email {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
+      padding: 1em;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .email-box {
+        display: none;
+      }
+
+      .footer-email {
+        display: block;
+      }
+
+      .overlay h1 {
+        font-size: 2em;
+      }
+
+      .overlay p {
+        font-size: 1em;
+        padding: 0 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="../vid/RaySpyPromo.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Transparent navbar -->
+  <header>
+        RaySpy
+  </header>
+
+  <!-- Overlay Section -->
+  <section class="overlay">
+    <h1>Instant <span id="rotating-heading">results</span>.</h1>
+    <p>Machine learning enhanced spectroscopy</p>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non ligula ut libero iaculis dapibus.
+      Quisque feugiat sapien nec tellus elementum, at fringilla turpis vulputate.
+    </p>
+    <p>
+      Sed sed velit a ante vehicula blandit. Morbi semper, diam sed dapibus lacinia, justo est iaculis libero,
+      at fermentum ipsum neque sit amet nibh.
+    </p>
+  </section>
+
+  <!-- Sticky Email Box (desktop only) -->
+  <div class="email-box">
+    📧 contact@rayspy.com
+  </div>
+
+  <!-- Footer Email (mobile only) -->
+  <footer class="footer-email">
+    📧 contact@rayspy.com
+  </footer>
+
+  <script>
+    const headings = [
+      "feedback",
+      "diagnostics",
+      "forensics",
+      "results"
+    ];
+  
+    let index = 0;
+    const headingEl = document.getElementById("rotating-heading");
+  
+    setInterval(() => {
+      index = (index + 1) % headings.length;
+      headingEl.innerHTML = headings[index];
+    }, 1000); // change every 3 seconds
+  </script>
+  
+</body>
+</html>
